@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library RFID System - Students</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="assets/js/config.js" defer></script>
+    <script src="assets/js/api.js" defer></script>
+    <script src="assets/js/catalog.js" defer></script>
+    <script src="assets/js/auth-guard.js" defer></script>
+    <script src="assets/js/sidebar.js" defer></script>
+    <script src="assets/js/students.js" defer></script>
+  </head>
+  <body>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <h1>Library RFID</h1>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="index.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
+            Dashboard
+          </a>
+          <a href="students.html" class="nav-item active">
+            <span class="nav-icon"><i class="fas fa-user-graduate"></i></span>
+            Students
+          </a>
+          <a href="visit-log.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-history"></i></span>
+            Visit Log
+          </a>
+          <a href="settings.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-gear"></i></span>
+            Settings
+          </a>
+        </nav>
+        <div class="sidebar-footer">
+          <div id="sidebarUser" class="sidebar-user hidden">Logged in as: admin</div>
+          <div class="sidebar-divider"></div>
+          <button id="logoutButton" class="logout-button" type="button" aria-label="Logout">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <path d="M16 17l5-5-5-5"/>
+              <path d="M21 12H9"/>
+            </svg>
+            <span>Logout</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="container">
+          <div class="header">
+            <h1>Students Management</h1>
+            <button id="addStudentBtn" class="scan-button">
+              <i class="fas fa-plus"></i>
+              Add Student
+            </button>
+          </div>
+
+          <!-- Search and Filter Section -->
+          <div class="card">
+            <div class="filters">
+              <div class="filter-item">
+                <div class="search-box">
+                  <i class="fas fa-search search-icon"></i>
+                  <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search students..."
+                  />
+                </div>
+              </div>
+              <div class="filter-item">
+                <select id="collegeFilter">
+                  <option value="">All Colleges</option>
+                </select>
+              </div>
+              <div class="filter-item">
+                <select id="courseFilter">
+                  <option value="">All Courses</option>
+                </select>
+              </div>
+              <div class="filter-item">
+                <select id="yearFilter">
+                  <option value="">All Years</option>
+                </select>
+              </div>
+              <div class="filter-item">
+                <select id="sectionFilter">
+                  <option value="">All Sections</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Students Table -->
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>RFID Number</th>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Year</th>
+                    <th>Section</th>
+                    <th width="100">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="studentsTableBody">
+                  <!-- Student rows will be inserted here -->
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination" id="pagination">
+              <!-- Pagination will be inserted here -->
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Add/Edit Student Modal -->
+    <div id="studentModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle">Add Student</h2>
+          <button class="close-btn">&times;</button>
+        </div>
+        <form id="studentForm">
+          <div class="form-group">
+            <label for="rfidNumber">RFID Number</label>
+            <input type="text" id="rfidNumber" name="rfid_number" required />
+          </div>
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="first_name" required />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="last_name" required />
+          </div>
+          <div class="form-group">
+            <label for="college">College</label>
+            <select id="college" name="college">
+              <option value="">Select College</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="course">Course</label>
+            <select id="course" name="course" disabled>
+              <option value="">Select College First</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="yearLevel">Year Level</label>
+            <select id="yearLevel" name="year_level" required>
+              <option value="">Select Year Level</option>
+              <option value="1">1st Year</option>
+              <option value="2">2nd Year</option>
+              <option value="3">3rd Year</option>
+              <option value="4">4th Year</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="section">Section</label>
+            <select id="section" name="section" required>
+              <option value="">Select Section</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="scan-button">Save Changes</button>
+            <button type="button" class="icon-button" id="cancelBtn">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+  </body>
+</html>

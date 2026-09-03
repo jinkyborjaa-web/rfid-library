@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library RFID System - Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script src="assets/js/config.js" defer></script>
+    <script src="assets/js/api.js" defer></script>
+    <script src="assets/js/auth-guard.js" defer></script>
+    <script src="assets/js/sidebar.js" defer></script>
+    <script src="assets/js/settings.js" defer></script>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-header"><h1>Library RFID</h1></div>
+        <nav class="sidebar-nav">
+          <a href="index.html" class="nav-item"><span class="nav-icon"><i class="fas fa-chart-line"></i></span>Dashboard</a>
+          <a href="students.html" class="nav-item"><span class="nav-icon"><i class="fas fa-user-graduate"></i></span>Students</a>
+          <a href="visit-log.html" class="nav-item"><span class="nav-icon"><i class="fas fa-history"></i></span>Visit Log</a>
+          <a href="settings.html" class="nav-item active"><span class="nav-icon"><i class="fas fa-gear"></i></span>Settings</a>
+        </nav>
+        <div class="sidebar-footer">
+          <div id="sidebarUser" class="sidebar-user hidden">Logged in as: admin</div>
+          <div class="sidebar-divider"></div>
+          <button id="logoutButton" class="logout-button" type="button" aria-label="Logout">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <path d="M16 17l5-5-5-5"/>
+              <path d="M21 12H9"/>
+            </svg>
+            <span>Logout</span>
+          </button>
+        </div>
+      </aside>
+      <main class="main-content"><div class="container">
+        <div class="header"><h1>Settings</h1></div>
+        <div id="settingsMessage" class="settings-message" role="status" aria-live="polite"></div>
+        <div class="settings-grid">
+          <section class="card settings-card"><div class="settings-title"><span class="section-icon"><i class="fas fa-user"></i></span><h2>Account Settings</h2></div>
+            <div class="settings-section">
+            <form id="profileForm" class="settings-form">
+              <div class="form-group"><label for="profileUsername">Username</label><input id="profileUsername" name="username" type="text" required /><small id="usernameError" class="field-error"></small></div>
+              <div class="form-group"><label for="profileEmail">Email</label><input id="profileEmail" name="email" type="email" required /><small id="emailError" class="field-error"></small></div>
+              <button class="scan-button" type="submit">Save Profile</button>
+            </form>
+            </div>
+            <div class="settings-section password-section">
+            <div class="settings-subtitle"><span class="section-icon"><i class="fas fa-lock"></i></span><h2>Change Password</h2></div>
+            <form id="passwordForm" class="settings-form">
+              <div class="form-group"><label for="currentPassword">Current Password</label><div class="settings-input-wrap"><input id="currentPassword" name="currentPassword" type="password" required /><button class="password-toggle settings-password-toggle" type="button" aria-label="Show current password" title="Show password"><i class="fas fa-eye"></i></button></div></div>
+              <div class="form-group"><label for="newPassword">New Password</label><div class="settings-input-wrap"><input id="newPassword" name="newPassword" type="password" minlength="8" required /><button class="password-toggle settings-password-toggle" type="button" aria-label="Show new password" title="Show password"><i class="fas fa-eye"></i></button></div><small class="helper-text">Minimum 8 characters</small></div>
+              <div class="form-group"><label for="confirmNewPassword">Confirm New Password</label><div class="settings-input-wrap"><input id="confirmNewPassword" name="confirmNewPassword" type="password" minlength="8" required /><button class="password-toggle settings-password-toggle" type="button" aria-label="Show confirmed password" title="Show password"><i class="fas fa-eye"></i></button></div><small id="passwordError" class="field-error"></small></div>
+              <button class="scan-button" type="submit">Change Password</button>
+            </form>
+            </div>
+          </section>
+          <section class="card settings-card"><div class="settings-title"><span class="section-icon"><i class="fas fa-graduation-cap"></i></span><h2>Colleges &amp; Courses</h2></div>
+            <form id="collegeForm" class="inline-form"><input name="name" type="text" placeholder="New college name" required /><button class="scan-button" type="submit"><i class="fas fa-plus"></i> Add College</button></form>
+            <div id="collegeList" class="college-list"></div>
+          </section>
+        </div>
+      </div></main>
+    </div>
+  </body>
+</html>
