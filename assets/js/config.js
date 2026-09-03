@@ -1,5 +1,10 @@
 // API Configuration
-const API_BASE_URL = window.API_BASE_URL || 'http://localhost:3000/api';
+// Prefer a runtime override: window.API_BASE_URL
+// Use localhost only when running locally
+const API_BASE_URL = window.API_BASE_URL ||
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:3000/api'
+    : 'https://rfid-library-r38h.onrender.com/api');
 
 // API Endpoints
 const API_ENDPOINTS = {
@@ -58,4 +63,4 @@ function showToast(message, type = 'success') {
 function handleError(error) {
     console.error('API Error:', error);
     showToast(error.message || 'An error occurred', 'error');
-} 
+}
