@@ -171,10 +171,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${student.section || '-'}</td>
                 <td>
                     <div class="action-buttons">
-                        <button onclick="editStudent(${student.student_id})" class="icon-button" title="Edit">
+                        <button onclick="editStudent(${student.student_id})" class="icon-button edit" title="Edit">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button onclick="deleteStudent(${student.student_id})" class="icon-button" title="Delete">
+                        <button onclick="deleteStudent(${student.student_id})" class="icon-button delete" title="Delete">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>

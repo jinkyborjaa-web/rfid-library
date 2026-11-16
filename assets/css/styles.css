@@ -159,7 +159,6 @@ body {
 .college-toggle i { width: 0.8rem; transition: transform 150ms ease; }
 .college-toggle:hover { color: #000; }
 .course-count { padding: 0.2rem 0.5rem; border-radius: 999px; background: #f1f1f1; color: #777; font-size: 0.7rem; font-weight: 500; }
-.delete-college:hover, .course-row .icon-button:hover { color: var(--danger-color); }
 .course-panel { padding: 0 1rem 1rem; border-top: 1px solid var(--border-color); }
 .course-form { margin: 1rem 0; }
 .course-row { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.875rem; }
@@ -300,7 +299,7 @@ body {
     border: 1px solid #d0d0d0;
     border-radius: 0.375rem;
     background: var(--card-background);
-    color: var(--text-primary);
+    color: var(--danger-color);
     font-size: 0.75rem;
     font-weight: 500;
     text-align: left;
@@ -571,16 +570,28 @@ input:-webkit-autofill {
     transition: all 0.2s;
 }
 
+.icon-button.edit {
+    color: var(--success-color);
+}
+
+.icon-button.delete,
+.delete-college,
+.course-row .icon-button {
+    color: var(--danger-color);
+}
+
 .icon-button:hover {
     background-color: var(--background-color);
     color: var(--primary-color);
 }
 
 .icon-button.edit:hover {
-    color: var(--primary-color);
+    color: var(--success-color);
 }
 
-.icon-button.delete:hover {
+.icon-button.delete:hover,
+.delete-college:hover,
+.course-row .icon-button:hover {
     color: var(--danger-color);
 }
 

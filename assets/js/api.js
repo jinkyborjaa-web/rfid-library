@@ -23,7 +23,8 @@ async function apiRequest(endpoint, method = 'GET', body) {
     let data = {};
     try { data = await response.json(); } catch (error) { /* non-JSON response */ }
     if (!response.ok) {
-        if (response.status === 401 && !window.location.pathname.endsWith('index.html')) {
+        const isLoginRequest = endpoint.endsWith('/auth/login');
+        if (response.status === 401 && !isLoginRequest && !window.location.pathname.endsWith('index.html')) {
             sessionStorage.removeItem('authToken');
             localStorage.removeItem('authToken');
             window.location.href = 'index.html';
