@@ -26,15 +26,22 @@ function canRequestReset(identifier) {
 }
 
 router.post('/login', async (req, res, next) => {
-    const username = typeof req.body.username === 'string' ? req.body.username.trim() : '';
+    const identifier = typeof req.body.username === 'string' ? req.body.username.trim() : '';
     const password = typeof req.body.password === 'string' ? req.body.password : '';
-    if (!username || !password) return res.status(400).json({ status: 'error', message: 'Username and password are required' });
+    if (!identifier || !password) return res.status(400).json({ status: 'error', message: 'Username/email and password are required' });
     try {
-        const { rows } = await pool.query('SELECT admin_id, username, email, password_hash FROM admin_users WHERE username = $1 LIMIT 1', [username]);
+        const { rows } = await pool.query(
+            `SELECT admin_id, username, email, password_hash
+             FROM admin_users
+             WHERE username = $1 OR lower(email) = lower($1)
+             ORDER BY CASE WHEN username = $1 THEN 0 ELSE 1 END
+             LIMIT 1`,
+            [identifier]
+        );
         let admin = rows[0];
-        if (!admin && username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
+        if (!admin && identifier === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
             const passwordHash = await bcrypt.hash(password, 12);
-            const result = await pool.query('INSERT INTO admin_users (username, password_hash) VALUES ($1, $2) RETURNING admin_id, username', [username, passwordHash]);
+            const result = await pool.query('INSERT INTO admin_users (username, password_hash) VALUES ($1, $2) RETURNING admin_id, username, email', [identifier, passwordHash]);
             admin = result.rows[0];
         }
         if (!admin || !(await bcrypt.compare(password, admin.password_hash))) {

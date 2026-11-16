@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         response.data.forEach(college => {
             const item = document.createElement('article');
             item.className = 'college-item';
-            item.innerHTML = `<div class="college-heading"><button class="college-toggle" type="button" aria-expanded="false"><i class="fas fa-chevron-right"></i><strong></strong><span class="course-count"></span></button><button class="icon-button delete-college" type="button" title="Delete college"><i class="fas fa-trash"></i></button></div><div class="course-panel" hidden><form class="inline-form course-form"><input name="name" type="text" placeholder="New course name" required /><button class="scan-button" type="submit"><i class="fas fa-plus"></i> Add Course</button></form><div class="course-list"></div></div>`;
+            item.innerHTML = `<div class="college-heading"><button class="college-toggle" type="button" aria-expanded="false"><i class="fas fa-chevron-right"></i><strong></strong><span class="course-count"></span></button><button class="icon-button delete delete-college" type="button" title="Delete college" aria-label="Delete college"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="m19 6-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></button></div><div class="course-panel" hidden><form class="inline-form course-form"><input name="name" type="text" placeholder="New course name" required /><button class="scan-button" type="submit"><i class="fas fa-plus"></i> Add Course</button></form><div class="course-list"></div></div>`;
             item.querySelector('strong').textContent = college.name;
             item.querySelector('.course-count').textContent = `${college.courses?.length || 0} ${(college.courses?.length || 0) === 1 ? 'course' : 'courses'}`;
             const panel = item.querySelector('.course-panel');
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         response.data.forEach(course => {
             const row = document.createElement('div');
             row.className = 'course-row';
-            row.innerHTML = `<span></span><button class="icon-button" type="button" title="Delete course"><i class="fas fa-trash"></i></button>`;
+            row.innerHTML = `<span></span><button class="icon-button delete" type="button" title="Delete course" aria-label="Delete course"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="m19 6-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></button>`;
             row.querySelector('span').textContent = course.name;
             row.querySelector('button').addEventListener('click', async () => {
                 const button = row.querySelector('button'); setLoading(button, true);

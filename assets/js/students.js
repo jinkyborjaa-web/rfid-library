@@ -171,11 +171,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${student.section || '-'}</td>
                 <td>
                     <div class="action-buttons">
-                        <button onclick="editStudent(${student.student_id})" class="icon-button edit" title="Edit">
-                            <i class="fas fa-edit"></i>
+                        <button onclick="editStudent(${student.student_id})" class="icon-button edit" type="button" title="Edit" aria-label="Edit student">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M12 20h9"></path>
+                                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"></path>
+                            </svg>
                         </button>
-                        <button onclick="deleteStudent(${student.student_id})" class="icon-button delete" title="Delete">
-                            <i class="fas fa-trash"></i>
+                        <button onclick="deleteStudent(${student.student_id})" class="icon-button delete" type="button" title="Delete" aria-label="Delete student">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M3 6h18"></path>
+                                <path d="M8 6V4h8v2"></path>
+                                <path d="m19 6-1 14H6L5 6"></path>
+                                <path d="M10 11v6"></path>
+                                <path d="M14 11v6"></path>
+                            </svg>
                         </button>
                     </div>
                 </td>

@@ -560,6 +560,9 @@ input:-webkit-autofill {
 }
 
 .icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.5rem;
     border: none;
     background: none;
@@ -570,13 +573,22 @@ input:-webkit-autofill {
     transition: all 0.2s;
 }
 
+.icon-button svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
 .icon-button.edit {
     color: var(--success-color);
 }
 
-.icon-button.delete,
-.delete-college,
-.course-row .icon-button {
+.icon-button.delete {
     color: var(--danger-color);
 }
 
@@ -587,12 +599,12 @@ input:-webkit-autofill {
 
 .icon-button.edit:hover {
     color: var(--success-color);
+    background-color: #ecfdf5;
 }
 
-.icon-button.delete:hover,
-.delete-college:hover,
-.course-row .icon-button:hover {
+.icon-button.delete:hover {
     color: var(--danger-color);
+    background-color: #fef2f2;
 }
 
 /* Scan Button */
