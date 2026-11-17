@@ -81,6 +81,50 @@ body {
     gap: 1rem;
 }
 
+.auth-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+}
+
+.auth-brand-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    padding: 10px 16px;
+    border: 1px solid rgb(255 255 255 / 0.18);
+    border-radius: 16px;
+    background: rgb(18 18 20 / 0.94);
+    box-shadow: 0 12px 32px rgb(0 0 0 / 0.24), inset 0 1px 0 rgb(255 255 255 / 0.08);
+    color: #f5f5f5;
+    text-decoration: none;
+}
+
+.auth-brand-icon {
+    display: grid;
+    flex: 0 0 40px;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgb(255 255 255 / 0.18);
+    border-radius: 12px;
+    background: rgb(34 34 36 / 0.94);
+    color: #f5f5f5;
+}
+
+.auth-brand-icon svg { width: 21px; height: 21px; }
+
+.auth-brand-name {
+    min-width: 0;
+    overflow: hidden;
+    font-size: 15px;
+    font-weight: 550;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .auth-brand-panel,
 .auth-card {
     position: relative;
@@ -125,10 +169,23 @@ body {
 
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .auth-brand-panel,
-    .auth-card {
+    .auth-card,
+    .auth-brand-label {
         background: rgb(255 255 255 / 0.055);
         -webkit-backdrop-filter: blur(20px) saturate(140%);
         backdrop-filter: blur(20px) saturate(140%);
+    }
+
+    .auth-brand-label {
+        background: rgb(255 255 255 / 0.06);
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+    }
+
+    .auth-brand-icon {
+        background: rgb(255 255 255 / 0.06);
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
     }
 }
 
