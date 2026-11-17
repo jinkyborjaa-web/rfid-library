@@ -21,6 +21,10 @@ app.use(cors({
 app.use(express.json());
 app.use(morgan('dev'));
 
+app.get(['/', '/index.html'], (req, res) => {
+    res.sendFile(path.join(__dirname, '..', '..', 'login.html'));
+});
+
 // Serve frontend static files (project root, two levels up from backend/src)
 app.use(express.static(path.join(__dirname, '..', '..')));
 
